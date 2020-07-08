@@ -39,9 +39,11 @@
   &:nth-child(even) {
     .slider__item-text {
       align-self: flex-end;
+      transition-delay: 0.65s;
 
       @media (max-width: $mobile) and (orientation: landscape) {
         align-self: flex-start;
+        transition-delay: 0.3s;
       }
     }
   }
@@ -96,6 +98,18 @@
   max-width: 34rem;
   font-size: 1.8rem;
   line-height: 2rem;
+  opacity: 0;
+  transform: translateX(5ch);
+  transition-property: opacity, transform;
+  transition-duration: 0.35s;
+  transition-timing-function: ease-out;
+  transition-delay: 0.3s;
+
+  .swiper-slide-active &,
+  .swiper-slide-next & {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
   @media (min-width: $stop-scaling) {
     margin-top: 36px;
