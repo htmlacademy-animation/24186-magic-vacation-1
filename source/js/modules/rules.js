@@ -1,7 +1,4 @@
-const LinkClass = {
-  show: `rules__link--show`,
-  animate: `rules__link--animate`
-};
+const LINK_ANIMATE_CLASS = `rules__link--animate`;
 
 const screenEl = document.querySelector(`.screen--rules`);
 const rulesEl = screenEl.querySelector(`.rules`);
@@ -10,7 +7,7 @@ const rulesLinkEl = rulesEl.querySelector(`.rules__link`);
 
 const observer = new MutationObserver(() => {
   if (!screenEl.classList.contains(`active`)) {
-    rulesLinkEl.classList.remove(LinkClass.animate);
+    rulesLinkEl.classList.remove(LINK_ANIMATE_CLASS);
   }
 });
 
@@ -19,5 +16,5 @@ observer.observe(screenEl, {
 });
 
 lastRulesItemTextEl.addEventListener(`animationend`, () => {
-  rulesLinkEl.classList.add(LinkClass.animate);
+  rulesLinkEl.classList.add(LINK_ANIMATE_CLASS);
 });
