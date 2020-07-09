@@ -159,6 +159,7 @@
     border-radius: 50%;
     line-height: 5rem;
     text-align: center;
+    animation: rules-item-number 0.35s ease backwards;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       top: 1rem;
@@ -179,9 +180,23 @@
 
   p {
     margin: 0;
+    animation: rules-item-text 0.35s ease backwards;
 
     @media (max-width: $tablet) and (orientation: portrait) {
       min-height: calc(1.4rem * 2.2);
+    }
+  }
+
+
+  @for $i from 1 to 5 {
+    &:nth-child(#{$i}) {
+      &::before {
+        animation-delay: 0.25s * $i;
+      }
+
+      p {
+        animation-delay: 0.25s * $i + 0.1s;
+      }
     }
   }
 }
@@ -190,6 +205,23 @@
   position: absolute;
   bottom: 6rem;
   right: 5.6rem;
+  overflow: hidden;
+  visibility: hidden;
+  color: transparent;
+  transition: color 0.35s ease 0.25s;
+
+  &::before {
+    transform: translate(50%, -50%);
+  }
+
+  &--animate {
+    visibility: visible;
+    color: $c-dark;
+
+    &::before {
+      animation: rules-link-before 0.35s ease-out forwards;
+    }
+  }
 
   @media (min-width: $stop-scaling) {
     bottom: 60px;
@@ -209,5 +241,44 @@
   @media (max-width: $mobile) and (orientation: landscape) {
     bottom: 2rem;
     right: 1.5rem;
+  }
+}
+
+@keyframes rules-item-number {
+  from {
+    transform: scale(0.25);
+    color: transparent;
+    opacity: 0;
+  }
+
+  0.0001% {
+    opacity: 1;
+  }
+
+  75% {
+    transform: scale(1.25);
+    color: inherit;
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes rules-item-text {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rules-link-before {
+  to {
+    transform: translate(-50%, -50%);
   }
 }
