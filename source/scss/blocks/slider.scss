@@ -169,6 +169,7 @@
   width: 4rem;
   height: 4rem;
   color: $c-dark;
+  visibility: hidden;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -233,6 +234,22 @@
     opacity: 0.5;
     pointer-events: none;
   }
+
+  .active & {
+    visibility: visible;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.2, 0.5, 0.45, 1.3);
+    animation-fill-mode: backwards;
+    animation-delay: 1s;
+
+    &.slider__control--prev {
+      animation-name: slider-prev-button-show;
+    }
+
+    &.slider__control--next {
+      animation-name: slider-next-button-show;
+    }
+  }
 }
 
 .slider__pagination.swiper-pagination {
@@ -288,5 +305,35 @@
       height: 0.4rem;
       background-color: $c-light;
     }
+  }
+}
+
+@keyframes slider-prev-button-show {
+  from {
+    transform: translateX(-100px) rotate(-180deg);
+    visibility: hidden;
+  }
+
+  0.0001% {
+    visibility: visible;
+  }
+
+  to {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes slider-next-button-show {
+  from {
+    transform: translateX(100px) rotate(180deg);
+    visibility: hidden;
+  }
+
+  0.0001% {
+    visibility: visible;
+  }
+
+  to {
+    transform: translateX(0) rotate(0deg);
   }
 }
